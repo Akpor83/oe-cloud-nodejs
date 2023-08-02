@@ -8,7 +8,7 @@ pipeline {
             environment {
                 DOCKER_REGISTRY = 'neroxxpips'
                 DOCKER_IMAGE_NAME = 'oe-cloud-node-jenkins'
-                DOCKER_IMAGE_TAG = 'latest'
+                DOCKER_IMAGE_TAG = ${BUILD_ID}
                 DOCKER_PASSWORD = credentials('docker-access-token')
                 DOCKER_USERNAME = 'neroxxpips'
             }
