@@ -2,7 +2,7 @@ version: 0.2
 
 phases:
   
-  pre-build:
+  pre_build:
     commands:
       - echo login to Amazon ECR
       - aws --version
