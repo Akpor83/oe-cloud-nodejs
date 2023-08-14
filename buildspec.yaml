@@ -1,13 +1,7 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: latest
-    commands:
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://140.82.112.3:443 --storage-driver=overlay2 &
-      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-
+  
   pre-build:
     commands:
       - echo login to Amazon ECR
@@ -17,6 +11,13 @@ phases:
       - REPOSITORY_URI=939138653191.dkr.ecr.us-east-1.amazonaws.com/aaa 
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://140.82.112.3:443 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+    
   build:
     commands:
       - echo Build started on 'date'
