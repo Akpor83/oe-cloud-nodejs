@@ -7,7 +7,10 @@ phases:
       - echo login to Amazon ECR
       - aws --version
       - echo $AWS_DEFAULT_REGION
-      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 939138653191.dkr.ecr.<your-region>.amazonaws.com
+
+  build:
+    commands:
       - REPOSITORY_URI=939138653191.dkr.ecr.us-east-1.amazonaws.com/aaa 
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
