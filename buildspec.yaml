@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1.2375 --storage-driver=overlay2 &
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://140.82.112.3:443 --storage-driver=overlay2 &
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
 
   pre-build:
